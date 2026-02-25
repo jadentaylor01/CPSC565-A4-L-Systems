@@ -17,19 +17,13 @@ public class LSystem
 
     public void step()
     {
-        Debug.Log(rules.Count);
-        Debug.Log(currentString.Count);
-        
         List<Symbol> newString = new List<Symbol>();
 
         foreach (Symbol s in currentString)
         {
-            Debug.Log("rule");
             bool ruleFound = false;
             foreach (Rule rule in rules)
             {
-                Debug.Log("char");
-
                 if (s.symbol == rule.predecessor)
                 {
                     newString.AddRange(rule.successor);
