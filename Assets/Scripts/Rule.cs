@@ -1,11 +1,15 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-namespace LSystem
+
+public class Rule
 {
-    public class Rule
+    public char predecessor;
+    public List<Symbol> successor;
+    
+    public Rule(char predecessor, List<Symbol> successor)
     {
-        public char Predecessor;
-        public List<Symbol> Successor;
-        
+        this.predecessor = predecessor;
+        this.successor = successor;
     }
 }

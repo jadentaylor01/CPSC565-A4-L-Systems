@@ -1,40 +1,64 @@
-using System.Diagnostics;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace LSystem
+
+public class LSystem
 {
-    public class LSystem
+    public List<Rule> rules;
+    public List<Symbol> axiom;
+    public List<Symbol> currentString;
+
+    public LSystem(List<Symbol> axiom, List<Rule> rules)
     {
-        public List<Rule> rules;
-        public List<Symbol> axiom;
-        public List<Symbol> currentString;
+        this.rules = rules;
+        this.axiom = axiom;
+        this.currentString = new List<Symbol>(axiom);
+    }
 
-        public LSystem(List<Rule> rules, List<Symbol> axiom)
-        {
-            this.rules = rules;
-            this.axiom = axiom;
-            this.currentString = new List<Symbol>(axiom);
-        }
+    public void step()
+    {
+        Debug.Log(rules.Count);
+        Debug.Log(currentString.Count);
+        
+        List<Symbol> newString = new List<Symbol>();
 
-        public void step()
+        foreach (Symbol s in currentString)
         {
+            Debug.Log("rule");
+            bool ruleFound = false;
             foreach (Rule rule in rules)
             {
-                for (int i = 0; i < currentString.Count; i++)
+                Debug.Log("char");
+
+                if (s.symbol == rule.predecessor)
                 {
-                    if (currentString[i].symbol == rule.Predecessor)
-                    {
-                        currentString.RemoveAt(i);
-                        currentString.InsertRange(i, rule.Successor);
-                    }
+                    newString.AddRange(rule.successor);
+                    ruleFound = true;
                 }
             }
-        }
 
-        public void reset()
-        {
-            currentString = new List<Symbol>(axiom);
+            if (!ruleFound)
+            {
+                newString.Add(s);
+            }
         }
+        currentString = newString;
+    }
+
+    public void reset()
+    {
+        currentString = new List<Symbol>(axiom);
+    }
+
+    public string getCurrentStringDisplay()
+    {
+        string curr = "";
+        foreach (Symbol s in currentString)
+        {
+            curr += s.symbol;
+        }
+        return curr;
     }
 }
+
     

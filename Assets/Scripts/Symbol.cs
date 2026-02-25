@@ -1,9 +1,14 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-namespace LSystem
+
+public class Symbol
 {
-    public class Symbol
+    public char symbol;
+
+    public Symbol(char symbol)
     {
-        public char symbol;
+        this.symbol = symbol;
     }
+
 }
