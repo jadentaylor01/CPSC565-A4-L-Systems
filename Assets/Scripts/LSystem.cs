@@ -1,37 +1,40 @@
 using System.Diagnostics;
 using UnityEngine;
 
-public class LSystem
+namespace LSystem
 {
-    public List<Rule> rules;
-    public List<Symbol> axiom;
-    public List<Symbol> currentString;
+    public class LSystem
+    {
+        public List<Rule> rules;
+        public List<Symbol> axiom;
+        public List<Symbol> currentString;
 
-    public LSystem(List<Rule> rules, List<Symbol> axiom)
-    {
-        this.rules = rules;
-        this.axiom = axiom;
-        this.currentString = new List<Symbol>(axiom);
-    }
-    
-    public void step()
-    {
-        foreach (Rule rule in rules)
+        public LSystem(List<Rule> rules, List<Symbol> axiom)
         {
-            for (int i = 0; i < currentString.Count; i++)
+            this.rules = rules;
+            this.axiom = axiom;
+            this.currentString = new List<Symbol>(axiom);
+        }
+
+        public void step()
+        {
+            foreach (Rule rule in rules)
             {
-                if (currentString[i].symbol == rule.Predecessor)
+                for (int i = 0; i < currentString.Count; i++)
                 {
-                    currentString.RemoveAt(i);
-                    currentString.InsertRange(i, rule.Successor);
+                    if (currentString[i].symbol == rule.Predecessor)
+                    {
+                        currentString.RemoveAt(i);
+                        currentString.InsertRange(i, rule.Successor);
+                    }
                 }
             }
         }
-    }
 
-    public void reset()
-    {
-        currentString = new List<Symbol>(axiom);
+        public void reset()
+        {
+            currentString = new List<Symbol>(axiom);
+        }
     }
 }
     

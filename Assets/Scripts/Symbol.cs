@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public class Symbol
+namespace LSystem
 {
-    public char symbol;
+    public class Symbol
+    {
+        public char symbol;
+    }
 }

@@ -1,8 +1,11 @@
 using UnityEngine;
 
-public class Rule
+namespace LSystem
 {
-    public char Predecessor;
-    public List<Symbol> Successor;
-    
+    public class Rule
+    {
+        public char Predecessor;
+        public List<Symbol> Successor;
+        
+    }
 }
