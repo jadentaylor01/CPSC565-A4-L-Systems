@@ -274,7 +274,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b8d4ba8a87ed5741a4d4dd57a3533a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Turtle
-  moveDistance: 1
-  cylinderRadius: 0.1
-  rotateAngle: 45
+  moveDistance: 0.2
+  cylinderRadius: 0.05
+  rotateAngle: 30
   material: {fileID: 2100000, guid: 7b61c96108b93414692cfe9bb418ec74, type: 2}
+  cylinders: []

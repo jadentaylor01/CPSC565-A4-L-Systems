@@ -18,6 +18,11 @@ public class SystemManager : MonoBehaviour
         systems = new List<LSystem>();
         // Axiom F
         systems.Add(new LSystem(generateSymbols("F"),rules));
+
+        // Generate the turtle
+        turtle = Instantiate(turtlePrefab);
+        turtleScript = turtle.GetComponent<Turtle>();
+        turtleScript.loadSystem(systems[0]);
     }
 
     // Update is called once per frame
@@ -43,15 +48,16 @@ public class SystemManager : MonoBehaviour
 
     public void stepLSystem()
     {
+        turtleScript.deleteCylinders();
         systems[0].step();
+        turtleScript.loadSystem(systems[0]);
+        turtle.transform.position = new Vector3(0, 0, 0);
+        
     }
 
     public void startTurtle()
     {
-        turtle = Instantiate(turtlePrefab);
-        turtleScript = turtle.GetComponent<Turtle>();
-
-        turtleScript.loadSystem(systems[0]);
+        turtleScript.interpretFullSystem();
     }
 
     public void stepTurtle()
