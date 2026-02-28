@@ -4,6 +4,10 @@ using System.Collections.Generic;
 public class SystemManager : MonoBehaviour
 {
     public List<LSystem> systems = new List<LSystem>();
+    public GameObject turtlePrefab;
+
+    GameObject turtle;
+    Turtle turtleScript;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {       
@@ -40,6 +44,19 @@ public class SystemManager : MonoBehaviour
     public void stepLSystem()
     {
         systems[0].step();
+    }
+
+    public void startTurtle()
+    {
+        turtle = Instantiate(turtlePrefab);
+        turtleScript = turtle.GetComponent<Turtle>();
+
+        turtleScript.loadSystem(systems[0]);
+    }
+
+    public void stepTurtle()
+    {
+        turtleScript.interpretNextSymbol();
     }
 
 }
