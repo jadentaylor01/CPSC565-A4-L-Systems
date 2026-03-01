@@ -12,7 +12,7 @@ public class LSystem
     {
         this.rules = rules;
         this.axiom = axiom;
-        this.currentString = new List<Symbol>(axiom);
+        this.currentString = axiom;
     }
 
     public void step()
@@ -41,7 +41,7 @@ public class LSystem
 
     public void reset()
     {
-        currentString = new List<Symbol>(axiom);
+        currentString = axiom;
     }
 
     public string getCurrentStringDisplay()
