@@ -14,11 +14,18 @@ public class SystemManager : MonoBehaviour
         List<Rule> rules = new List<Rule>();
         // F -> F[+F]F[-F]F
         // rules.Add(new Rule('F', generateSymbols("F[+F]F[-F]F")));
-        rules.Add(new Rule('F', generateSymbols("F[+F-F]F[-F+F]F")));
+
 
         systems = new List<LSystem>();
-        // Axiom F
+
+        // Ruleset 1
+        rules.Add(new Rule('F', generateSymbols("F[+F-F]F[-F+F]F")));
+        rules.Add(new Rule('+', generateSymbols("--F")));
+        rules.Add(new Rule('-', generateSymbols("+F")));
         systems.Add(new LSystem(generateSymbols("F"),rules));
+
+        // Ruleset 2
+        
 
         // Generate the turtle
         turtle = Instantiate(turtlePrefab);
