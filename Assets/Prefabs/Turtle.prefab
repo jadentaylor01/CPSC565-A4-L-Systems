@@ -277,5 +277,5 @@ MonoBehaviour:
   moveDistance: 0.2
   cylinderRadius: 0.05
   rotateAngle: 30
-  material: {fileID: 2100000, guid: 7b61c96108b93414692cfe9bb418ec74, type: 2}
+  material: {fileID: 2100000, guid: adff91258c0362b48873db98840919e0, type: 2}
   cylinders: []
