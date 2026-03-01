@@ -15,12 +15,11 @@ public class SystemManager : MonoBehaviour
         // F -> F[+F]F[-F]F
         // rules.Add(new Rule('F', generateSymbols("F[+F]F[-F]F")));
 
-
         systems = new List<LSystem>();
 
         // Ruleset 1
         rules.Add(new Rule('F', generateSymbols("F[+F-F]F[-F+F]F")));
-        rules.Add(new Rule('+', generateSymbols("--F")));
+        rules.Add(new Rule('+', generateSymbols("--F"),0.1f));
         rules.Add(new Rule('-', generateSymbols("+F")));
         systems.Add(new LSystem(generateSymbols("F"),rules));
 
@@ -33,10 +32,31 @@ public class SystemManager : MonoBehaviour
         turtleScript.loadSystem(systems[0]);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void stepD0LSystem()
     {
-        
+        systems[0].deterministicStep();
+        turtleScript.loadSystem(systems[0]); 
+    }
+
+    public void stepStochasticLSystem()
+    {
+        systems[0].stochasticStep();
+        turtleScript.loadSystem(systems[0]); 
+    }
+
+    public void resetLSystem()
+    {
+        turtleScript.deleteCylinders();
+        systems[0].reset();
+        turtle.transform.position = new Vector3(0, 0, 0);
+    }
+
+    public void startTurtle(float branchAngle, float branchRadius, float symbolLength)
+    {
+        turtleScript.moveDistance = symbolLength;
+        turtleScript.cylinderRadius = branchRadius;
+        turtleScript.rotateAngle = branchAngle;
+        turtleScript.interpretFullSystem();
     }
 
     public List<Symbol> generateSymbols(string str)
@@ -53,35 +73,4 @@ public class SystemManager : MonoBehaviour
     {
         return systems[0].getCurrentStringDisplay();
     }
-
-    public void stepLSystem()
-    {
-        systems[0].step();
-        turtleScript.loadSystem(systems[0]); 
-    }
-
-    public void resetLSystem()
-    {
-        turtleScript.deleteCylinders();
-        systems[0].reset();
-        turtle.transform.position = new Vector3(0, 0, 0);
-    }
-
-    // public void startTurtle()
-    // {
-    //     return;
-    // }
-    public void startTurtle(float branchAngle, float branchRadius, float symbolLength)
-    {
-        turtleScript.moveDistance = symbolLength;
-        turtleScript.cylinderRadius = branchRadius;
-        turtleScript.rotateAngle = branchAngle;
-        turtleScript.interpretFullSystem();
-    }
-
-    public void stepTurtle()
-    {
-        turtleScript.interpretNextSymbol();
-    }
-
 }
