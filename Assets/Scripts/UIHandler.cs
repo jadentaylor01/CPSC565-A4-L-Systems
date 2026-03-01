@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Security.Cryptography;
+using System.Collections;
 
 public class UIHandler : MonoBehaviour
 {
     private SystemManager systemManager;
-
+    public TMP_Dropdown rulesetDropdown;
     public TMP_InputField iterationsInput;
     public TMP_InputField branchAngleInput;
     public TMP_InputField branchRadiusInput;
@@ -41,7 +41,7 @@ public class UIHandler : MonoBehaviour
     /// </summary>
     void generateD0L()
     {
-        systemManager.resetLSystem();
+        setRuleset();
         stepD0LString(int.Parse(iterationsInput.text));
         systemManager.startTurtle(
             float.Parse(branchAngleInput.text),
@@ -69,7 +69,7 @@ public class UIHandler : MonoBehaviour
     /// </summary>
     void generateStochastic()
     {
-        systemManager.resetLSystem();
+        setRuleset();
         stepStochasticLString(int.Parse(iterationsInput.text));
         systemManager.startTurtle(
             float.Parse(branchAngleInput.text),
@@ -88,5 +88,24 @@ public class UIHandler : MonoBehaviour
         {
             systemManager.stepStochasticLSystem();
         }
+    }
+
+    /// <summary>
+    /// Sets the ruleset based on the dropdown.
+    /// </summary>
+    void setRuleset()
+    {
+        systemManager.resetLSystem(); // Must reset old system before switching ruleset.
+
+        if (rulesetDropdown.options[rulesetDropdown.value].text == "Ruleset 1")
+        {
+            systemManager.selectedRuleset = 0;
+        }
+        
+        if (rulesetDropdown.options[rulesetDropdown.value].text == "Ruleset 2")
+        {
+            systemManager.selectedRuleset = 1;
+        }
+        // Debug.Log(rulesetDropdown.options[rulesetDropdown.value].text );
     }
 }
