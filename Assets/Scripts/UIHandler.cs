@@ -1,19 +1,22 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Security.Cryptography;
 
 public class UIHandler : MonoBehaviour
 {
     private SystemManager systemManager;
-    public Button stepButton;
     public Button generateButton;
     public Button nextButton;
     public TMP_Text currentStringText;
+    public TMP_InputField iterationsInput;
+    public TMP_InputField branchAngleInput;
+    public TMP_InputField branchRadiusInput;
+    public TMP_InputField symbolLengthInput;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         systemManager = this.GetComponent<SystemManager>();
-        stepButton.onClick.AddListener(stepString);
         generateButton.onClick.AddListener(generate);
         nextButton.onClick.AddListener(stepTurtle);
     }
@@ -21,19 +24,34 @@ public class UIHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentStringText.text = systemManager.getCurrentString();
-    }
+        // currentStringText.text = systemManager.getCurrentString();
 
-    void stepString()
-    {
-        systemManager.stepLSystem();
+        // Enter generates new tree
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            generate();
+        }
     }
 
     void generate()
     {
-
-        systemManager.startTurtle();
+        systemManager.resetLSystem();
+        stepString(int.Parse(iterationsInput.text));
+        systemManager.startTurtle(
+            float.Parse(branchAngleInput.text),
+            float.Parse(branchRadiusInput.text),
+            float.Parse(symbolLengthInput.text)
+        );
     }
+
+    void stepString(int iterations)
+    {
+        for (int i = 0; i < iterations; i++)
+        {
+            systemManager.stepLSystem();
+        }
+    }
+
 
     void stepTurtle()
     {
