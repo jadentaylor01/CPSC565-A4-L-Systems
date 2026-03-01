@@ -96,6 +96,9 @@ public class Turtle : MonoBehaviour
                 transform.position = positionStack.Pop();
                 transform.rotation = rotationStack.Pop();
                 break;
+            case 'X':
+                // Do nothing on X, could omit
+                break;
         }
         currentSymbolIndex++;
         return true;

@@ -64,6 +64,7 @@ public class SystemManager : MonoBehaviour
         turtleScript.deleteCylinders();
         systems[selectedRuleset].reset();
         turtle.transform.position = new Vector3(0, 0, 0);
+        turtle.transform.rotation = Quaternion.Euler(Vector3.up);
     }
 
     /// <summary>
