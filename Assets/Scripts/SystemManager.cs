@@ -13,7 +13,8 @@ public class SystemManager : MonoBehaviour
     {       
         List<Rule> rules = new List<Rule>();
         // F -> F[+F]F[-F]F
-        rules.Add(new Rule('F', generateSymbols("F[+F]F[-F]F")));
+        // rules.Add(new Rule('F', generateSymbols("F[+F]F[-F]F")));
+        rules.Add(new Rule('F', generateSymbols("F[+F-F]F[-F+F]F")));
 
         systems = new List<LSystem>();
         // Axiom F
@@ -48,15 +49,26 @@ public class SystemManager : MonoBehaviour
 
     public void stepLSystem()
     {
-        turtleScript.deleteCylinders();
         systems[0].step();
-        turtleScript.loadSystem(systems[0]);
-        turtle.transform.position = new Vector3(0, 0, 0);
-        
+        turtleScript.loadSystem(systems[0]); 
     }
 
-    public void startTurtle()
+    public void resetLSystem()
     {
+        turtleScript.deleteCylinders();
+        systems[0].reset();
+        turtle.transform.position = new Vector3(0, 0, 0);
+    }
+
+    // public void startTurtle()
+    // {
+    //     return;
+    // }
+    public void startTurtle(float branchAngle, float branchRadius, float symbolLength)
+    {
+        turtleScript.moveDistance = symbolLength;
+        turtleScript.cylinderRadius = branchRadius;
+        turtleScript.rotateAngle = branchAngle;
         turtleScript.interpretFullSystem();
     }
 

@@ -15,7 +15,7 @@ public class Turtle : MonoBehaviour
     private int currentSymbolIndex = 0;
 
     // The LSystem being interpretted
-    private LSystem system;
+    public LSystem system;
 
     public List<GameObject> cylinders = new List<GameObject>();
     // To handle brackets in string
@@ -24,6 +24,8 @@ public class Turtle : MonoBehaviour
 
     public void loadSystem(LSystem system)
     {
+        currentSymbolIndex = 0;
+        color = true;
         this.system = system;
     }
 
@@ -64,11 +66,11 @@ public class Turtle : MonoBehaviour
                 break;
             case '+':
                 // Rotate the turtle by the angle
-                transform.Rotate(new Vector3(0,0,-rotateAngle));
+                transform.Rotate(new Vector3(0,0,rotateAngle));
                 break;
             case '-':
                 // Rotate the turtle by the angle
-                transform.Rotate(new Vector3(0,0,rotateAngle));
+                transform.Rotate(new Vector3(0,0,-rotateAngle));
                 break;
             case '[':
                 // Push the turtles current position and rotation to the stack
