@@ -22,6 +22,10 @@ public class UIHandler : MonoBehaviour
         // Set up button listeners
         generateD0LButton.onClick.AddListener(generateD0L);
         generateStochasticButton.onClick.AddListener(generateStochastic);
+        rulesetDropdown.onValueChanged.AddListener(delegate {
+            setDefaultParameters();
+        });
+        setDefaultParameters();
     }
 
     // Update is called once per frame
@@ -107,5 +111,24 @@ public class UIHandler : MonoBehaviour
             systemManager.selectedRuleset = 1;
         }
         // Debug.Log(rulesetDropdown.options[rulesetDropdown.value].text );
+    }
+
+    void setDefaultParameters()
+    {
+        if (rulesetDropdown.options[rulesetDropdown.value].text == "Ruleset 1")
+        {
+            iterationsInput.text = "7";
+            branchAngleInput.text = "20";
+            branchRadiusInput.text = "3";
+            symbolLengthInput.text = "0.6";
+        }
+
+        if (rulesetDropdown.options[rulesetDropdown.value].text == "Ruleset 2")
+        {
+            iterationsInput.text = "3";
+            branchAngleInput.text = "20";
+            branchRadiusInput.text = "3";
+            symbolLengthInput.text = "0.6";
+        }
     }
 }
