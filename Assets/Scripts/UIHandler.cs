@@ -125,10 +125,10 @@ public class UIHandler : MonoBehaviour
 
         if (rulesetDropdown.options[rulesetDropdown.value].text == "Ruleset 2")
         {
-            iterationsInput.text = "3";
-            branchAngleInput.text = "20";
-            branchRadiusInput.text = "3";
-            symbolLengthInput.text = "0.6";
+            iterationsInput.text = "6";
+            branchAngleInput.text = "12";
+            branchRadiusInput.text = "2";
+            symbolLengthInput.text = "0.15";
         }
     }
 }

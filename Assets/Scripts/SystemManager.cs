@@ -15,16 +15,17 @@ public class SystemManager : MonoBehaviour
         
         // Ruleset 1
         List<Rule> ruleset1 = new List<Rule>();
-        ruleset1.Add(new Rule('F', generateSymbols("F[+F]F[-F]F")));
-        // rules.Add(new Rule('+', generateSymbols("--F"),0.1f));
-        // rules.Add(new Rule('-', generateSymbols("+F")));
-        systems.Add(new LSystem(generateSymbols("F"),ruleset1));
+        ruleset1.Add(new Rule('X', generateSymbols("F[+X]F[-X]+X"),1.0f));
+        ruleset1.Add(new Rule('F', generateSymbols("FF"),0.8f));
+        systems.Add(new LSystem(generateSymbols("X"),ruleset1));
 
         // Ruleset 2
         List<Rule> ruleset2 = new List<Rule>();
-        ruleset2.Add(new Rule('F', generateSymbols("F[+F]F[-F][F]")));
-        // rules.Add(new Rule('+', generateSymbols("--F"),0.1f));
-        // rules.Add(new Rule('-', generateSymbols("+F")));
+        ruleset2.Add(new Rule('F', generateSymbols("F[+X]F[-X]F"),0.5f));
+        ruleset2.Add(new Rule('F', generateSymbols("F[+XX]F[-XX]F"),0.5f));
+        ruleset2.Add(new Rule('X', generateSymbols("-L[X]-L[X]-L[X]-L[X]-L[X]-L[X]"),0.8f));
+        ruleset2.Add(new Rule('X', generateSymbols("+L[X]+L[X]+L[X]+L[X]+L[X]+L[X]"),0.2f));
+        ruleset2.Add(new Rule('L', generateSymbols("F"),1.0f)); 
         systems.Add(new LSystem(generateSymbols("F"),ruleset2));
 
         // Generate the turtle
