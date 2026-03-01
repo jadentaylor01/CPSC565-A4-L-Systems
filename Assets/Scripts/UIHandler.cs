@@ -39,8 +39,8 @@ public class UIHandler : MonoBehaviour
         stepString(int.Parse(iterationsInput.text));
         systemManager.startTurtle(
             float.Parse(branchAngleInput.text),
-            float.Parse(branchRadiusInput.text),
-            float.Parse(symbolLengthInput.text)
+            float.Parse(branchRadiusInput.text)/100,
+            float.Parse(symbolLengthInput.text)/10
         );
     }
 
